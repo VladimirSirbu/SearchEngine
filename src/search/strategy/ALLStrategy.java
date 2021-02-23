@@ -3,13 +3,12 @@ package search.strategy;
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
+import static search.SearchEngine.*;
 
 public class ALLStrategy implements Strategy {
 
-   private BufferedReader reader;
+   public ALLStrategy(){
 
-   public ALLStrategy(BufferedReader reader){
-       this.reader = reader;
    }
 
     @Override
@@ -17,10 +16,9 @@ public class ALLStrategy implements Strategy {
 
         Set<String> answerList = new HashSet<>();
 
-        System.out.println("\nEnter a name or email to search all suitable people.");
+        System.out.print("->Enter a name or email to search all suitable people: ");
 
-        try {
-            String[] search = reader.readLine().split(" ");
+            String[] search = scanner.nextLine().split(" ");
 
             List<Integer> first = map.get(search[0].toLowerCase());
             for (int i = 1; i < search.length; i++) {
@@ -36,9 +34,7 @@ public class ALLStrategy implements Strategy {
                         answerList.add(list.get(result.get(j)));
                     }
             }
-        }catch (IOException | NullPointerException e){
-            System.out.println("No matching people find!");
-        }
+
 
         return answerList;
     }
